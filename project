@@ -1,1 +1,87 @@
+#This is a basketball simulator, putting you ina action as a coach for your team! Can you win?
+
+
+import random
+import time 
+
+user_team_name = input("What would you like your team name to be?: ")
+opponent_team_names = ["Red Dragons", "Thunderbirds", "Warhawks"]
+opponent_team_name = random.choice(opponent_team_names)
+print("You're up against the ",opponent_team_name)
+
+pass_words = [" dishes it to ", " passes it to ", " gives the ball to "]
+defense_words = [" comes up with a steal ", " steals the ball ", " with the rejection "]
+shot_words = [" takes a shot and... ", " shoots and... ", " takes a shot from way downtown and... ", " crosses his defender, steps back and shoots and... "]
+basket_words = [" makes the basket! BANG! ", " and the basket is good! ", " drills it in! SPLASH! "]
+missed_basket_words = " just misses it! "
+
+opponent_roster = ["James", "Davis", "Reaves", "Wade", "Dennis"]
+
+user_pg = input("What would you like your PG's name to be?: ")
+user_sg = input("What would you like your SG's name to be?: ")
+user_sf = input("What would you like your SF's name to be?: ")
+user_pf = input("What would you like your PF's name to be?: ")
+user_c = input("What would you like your C's name to be?: ")
+
+user_roster = [user_pg, user_sg, user_sf, user_pf,user_c]
+
+random_basket_words = random.choice(basket_words)
+
+
+def start_game():
+  user_team_score = 0
+  opponent_team_score = 0
+  game_time = 0
+  print("Jump Ball! And the game has begun! ")
+  while game_time < 10:
+    two_point_success = random.randint(0,1)
+    three_point_success = random.randint(0,1)
+    ball_possesion = random.randint(0,1)
+    if ball_possesion == 0:
+      time.sleep(3)
+      print("The ", opponent_team_name, " run up the court with the ball! ")
+      print(random.choice(opponent_roster), random.choice(pass_words), random.choice(opponent_roster), random.choice(shot_words))
+      time.sleep(3)
+    if two_point_success == 1 and ball_possesion == 0:
+      print(random_basket_words)
+      opponent_team_score += 2
+      print("The score is now ", user_team_score, "-", opponent_team_score)
+      time.sleep(3)
+      game_time += 1
+    if three_point_success == 1 and two_point_success == 0 and ball_possesion == 0:
+      print(random_basket_words)
+      opponent_team_score += 3
+      print("The score is now ", user_team_score, "-", opponent_team_score)
+      time.sleep(3)
+      game_time += 1
+    if three_point_success == 0 and two_point_success == 0 and ball_possesion == 0:
+      print(missed_basket_words)
+
+    if ball_possesion == 1:
+      time.sleep(3)
+      print("The ", user_team_name, " run up the court with the ball! ")
+      print(random.choice(user_roster), random.choice(pass_words), random.choice(user_roster), random.choice(shot_words)) 
+    if two_point_success == 1 and ball_possesion == 1:
+      print(random_basket_words)
+      user_team_score += 2
+      print("The score is now", user_team_score, "-", opponent_team_score)
+      time.sleep(3)
+      game_time += 1
+    if three_point_success == 1 and two_point_success == 0 and ball_possesion == 1:
+      print(random_basket_words)
+      user_team_score += 3
+      print("The score is now", user_team_score, "-", opponent_team_score)
+      time.sleep(3)
+      game_time += 1
+    if three_point_success == 0 and two_point_success == 0 and ball_possesion == 1:
+      print(missed_basket_words)
+
+  if user_team_score > opponent_team_score:
+    print("The", user_team_name, " have won the game!")
+  elif user_team_score < opponent_team_score:
+    print("The", opponent_team_name, " have won the game!")
+  else:
+    print("The game ends in a tie! ")
+
+start_game()
 
